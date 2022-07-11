@@ -14,6 +14,7 @@ public class MapDemo {
 		
 		Configuration cfg=new Configuration();
 		cfg.configure();
+		
 		SessionFactory factory=cfg.buildSessionFactory();
 		
 		Question que=new Question();
@@ -22,7 +23,7 @@ public class MapDemo {
         
         Answer ans=new Answer();
         ans.setAnswerId(101);
-        ans.setAnswer("java is higly secure ");
+        ans.setAnswer("java is higly secure!");
         
         Answer an1 =new Answer();
 		an1.setAnswerId(102);
@@ -49,6 +50,14 @@ public class MapDemo {
 	    session.save(an2);
 	    
 	    tx.commit();
+	    
+	    Question q=(Question)session.get(Question.class, 101);
+	    System.out.println(q.getQuetion());
+	    
+	    for(Answer a:q.getAnswer()) {
+	    	System.out.println(a.getAnswer());
+	    }
+	    
 	    session.close();
 	    factory.close();
 		
